@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="bn" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VEXCEL NETWORK - The Best Minecraft Server Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for theme */
+        :root {
+            --bg-dark-navy: #0a192f;
+            --accent-cyan: #22d3ee;
+            --accent-purple: #a855f7;
+            --text-light: #ccd6f6;
+            --text-dark: #8892b0;
+            --card-bg: rgba(10, 25, 47, 0.85);
+            --card-border: rgba(34, 211, 238, 0.1);
+            --shadow-color: rgba(168, 85, 247, 0.5);
+            --glow-color-cyan: rgba(34, 211, 238, 0.8);
+            --glow-color-purple: rgba(168, 85, 247, 0.8);
+            --status-online: #22c55e;
+            --status-offline: #ef4444;
+        }
+
+        /* General Body Styles */
+        body {
+            background-color: var(--bg-dark-navy);
+            color: var(--text-light);
+            font-family: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background-color: rgba(10, 25, 47, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 0.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand-logo img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        .brand-logo img:hover {
+            transform: scale(1.05);
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+        .nav-links .buy-rank-btn {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            padding: 8px 16px;
+            border-radius: 6px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .nav-links .buy-rank-btn:hover {
+            color: #fff;
+            box-shadow: 0 0 15px var(--glow-color-purple);
+        }
+        .lang-switcher button {
+            background: none;
+            border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .lang-switcher button.active {
+            background-color: var(--accent-cyan);
+            color: var(--bg-dark-navy);
+            border-color: var(--accent-cyan);
+            font-weight: bold;
+        }
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero .title-block h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 0;
+            color: var(--text-light);
+            animation: gradient-text 5s ease infinite;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-cyan));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes gradient-text {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .hero .title-block .smp-subtitle {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: -10px 0 10px 0;
+        }
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            animation: slide-in 1s ease-out forwards;
+        }
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hero .supported-versions {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+        .ip-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 15px 20px;
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .ip-card .ip-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .ip-card .ip-address {
+            font-size: 1.2rem;
+            font-family: monospace;
+            background: #0002;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .btn {
+            background-color: var(--accent-cyan);
+            color: var(--bg-dark-navy);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--glow-color-cyan);
+        }
+        .btn-purple {
+            background-color: var(--accent-purple);
+        }
+        .btn-purple:hover {
+            box-shadow: 0 0 15px var(--glow-color-purple);
+        }
+
+        /* Live Status */
+        .live-status {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .status-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: var(--status-offline);
+            transition: background-color 0.5s ease;
+        }
+        .status-dot.online {
+            background-color: var(--status-online);
+            box-shadow: 0 0 10px var(--status-online);
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 60px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--text-light);
+        }
+        .section-title span {
+            color: var(--accent-cyan);
+        }
+
+        /* Card Styles */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: #112240;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -15px var(--shadow-color);
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            margin-top: 0;
+        }
+        .card p {
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+        .rank-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin: 1rem 0;
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+        }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .contact-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+        .contact-link:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            transform: translateY(-3px);
+        }
+        .contact-link svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-dark);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: var(--bg-dark-navy);
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 0 30px var(--shadow-color);
+        }
+        .close-btn {
+            color: var(--text-dark);
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .close-btn:hover,
+        .close-btn:focus {
+            color: var(--accent-cyan);
+        }
+        .modal-content h2 {
+            color: var(--accent-cyan);
+            margin-top: 0;
+        }
+        .modal-content .rank-price {
+            text-align: center;
+        }
+        .modal-content ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        .modal-content ul li {
+            background: var(--card-bg);
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent-purple);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 66px;
+                left: 0;
+                right: 0;
+                background-color: var(--bg-dark-navy);
+                width: 100%;
+                padding: 20px 0;
+                border-bottom: 1px solid var(--card-border);
+                text-align: center;
+                gap: 0;
+            }
+            .nav-links li {
+                padding: 10px 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .mobile-nav-toggle {
+                display: block;
+            }
+            .hero .title-block h1 {
+                font-size: 3rem;
+            }
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="brand-logo">
+                <img src="https://i.postimg.cc/9fmPjLtk/IMG-20250817-045335-removebg-preview.png" alt="VEXCEL NETWORK Logo">
+            </a>
+            <div class="nav-right">
+                <nav>
+                    <ul class="nav-links" id="nav-links">
+                        <li><a href="#home" data-translate-key="nav.home"></a></li>
+                        <li><a href="#gamemodes" data-translate-key="nav.gamemodes"></a></li>
+                        <li><a href="#ranks" data-translate-key="nav.ranks"></a></li>
+                        <li><a href="#contact" data-translate-key="nav.contact"></a></li>
+                        <li><a href="#" class="buy-rank-btn" id="nav-buy-rank" data-translate-key="nav.buy_rank"></a></li>
+                    </ul>
+                </nav>
+                <div class="lang-switcher">
+                    <button data-lang="bn">BN</button>
+                    <button data-lang="en">EN</button>
+                </div>
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="title-block">
+                    <h1>VEXCEL NETWORK</h1>
+                    <h2 class="smp-subtitle">SMP</h2>
+                    <p class="tagline" data-translate-key="hero.tagline"></p>
+                </div>
+                <p class="supported-versions" data-translate-key="hero.supported_versions"></p>
+
+                <div class="live-status">
+                    <div class="status-dot" id="status-dot"></div>
+                    <span id="player-count" data-translate-key="hero.player_count_loading"></span>
+                </div>
+
+                <div class="ip-card">
+                    <div class="ip-group">
+                        <span class="ip-address" id="ip-address">play.vexcelnetwork.top</span>
+                        <button class="btn" id="copy-ip-btn" data-translate-key="hero.copy_ip"></button>
+                    </div>
+                    <div class="ip-group">
+                        <span class="ip-address" id="port-address">25687</span>
+                        <button class="btn btn-purple" id="copy-port-btn" data-translate-key="hero.copy_port"></button>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#ranks" class="btn" data-translate-key="hero.buy_rank"></a>
+                    <a href="#gamemodes" class="btn btn-purple" data-translate-key="hero.explore_modes"></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Modes Section -->
+        <section id="gamemodes" class="section">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="gamemodes.title"></h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3 data-translate-key="gamemodes.survival.title"></h3>
+                        <p data-translate-key="gamemodes.survival.desc"></p>
+                    </div>
+                    <div class="card">
+                        <h3 data-translate-key="gamemodes.lifesteal.title"></h3>
+                        <p data-translate-key="gamemodes.lifesteal.desc"></p>
+                    </div>
+                    <div class="card">
+                        <h3 data-translate-key="gamemodes.skyblock.title"></h3>
+                        <p data-translate-key="gamemodes.skyblock.desc"></p>
+                    </div>
+                    <div class="card">
+                        <h3 data-translate-key="gamemodes.pvp.title"></h3>
+                        <p data-translate-key="gamemodes.pvp.desc"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ranks Section -->
+        <section id="ranks" class="section">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="ranks.title"></h2>
+                <div class="card-grid" id="ranks-grid">
+                    <!-- Rank cards will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title" data-translate-key="contact.title"></h2>
+                <p data-translate-key="contact.description"></p>
+                <div class="contact-links">
+                    <a href="#" target="_blank" class="contact-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.32 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"></path></svg>
+                        Facebook
+                    </a>
+                    <a href="#" target="_blank" class="contact-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.2,5.2 0,0 1,16.2 22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.2,5.2 0,0 1,7.8 2M7.6,4A3.6,3.6 0,0 0,4 7.6V16.4A3.6,3.6 0,0 0,7.6 20H16.4A3.6,3.6 0,0 0,20 16.4V7.6A3.6,3.6 0,0 0,16.4 4H7.6M17.2,6A1.2,1.2 0,1 1,16 7.2A1.2,1.2 0,0 1,17.2 6M12,7A5,5 0,1 1,7 12A5,5 0,0 1,12 7M12,9A3,3 0,1 0,15 12A3,3 0,0 0,12 9Z"></path></svg>
+                        Instagram
+                    </a>
+                    <a href="https://wa.me/8801881740918" target="_blank" class="contact-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.98 2.7 15.93 3.68 17.61L2.53 21.47L6.54 20.34C8.14 21.24 10.04 21.72 12.04 21.72C17.5 21.72 21.95 17.27 21.95 11.81C21.95 6.35 17.5 2 12.04 2M12.04 3.63C16.56 3.63 20.32 7.32 20.32 11.81C20.32 16.3 16.56 20.09 12.04 20.09C10.22 20.09 8.52 19.54 7.11 18.59L6.77 18.37L4.73 18.93L5.31 16.96L5.07 16.62C4.04 15.15 3.5 13.45 3.5 11.81C3.5 7.32 7.26 3.63 12.04 3.63M9.33 8.23C9.13 7.79 8.96 7.78 8.8 7.78C8.66 7.78 8.5 7.78 8.34 7.78C8.18 7.78 7.91 7.85 7.68 8.11C7.45 8.37 6.81 8.95 6.81 10.1C6.81 11.25 7.71 12.34 7.85 12.51C8 12.68 9.16 14.44 10.92 15.22C12.68 16 13.21 15.75 13.62 15.71C14.03 15.66 14.86 15.15 15.05 14.54C15.24 13.93 15.24 13.42 15.18 13.31C15.12 13.2 14.95 13.14 14.7 13.01C14.45 12.88 13.29 12.31 13.06 12.22C12.83 12.14 12.67 12.1 12.51 12.36C12.35 12.62 11.94 13.13 11.8 13.29C11.66 13.45 11.53 13.48 11.28 13.35C11.03 13.23 10.25 12.98 9.32 12.13C8.58 11.46 8.07 10.65 7.94 10.42C7.81 10.18 7.91 10.05 8.02 9.94C8.11 9.84 8.23 9.69 8.36 9.55C8.49 9.41 8.54 9.31 8.64 9.11C8.74 8.91 8.69 8.74 8.63 8.64C8.58 8.54 8.33 7.97 8.13 7.53L9.33 8.23Z"></path></svg>
+                        WhatsApp
+                    </a>
+                    <a href="mailto:siryxrey@gmail.com" class="contact-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6M20 6L12 11L4 6H20M20 18H4V8L12 13L20 8V18Z"></path></svg>
+                        Email
+                    </a>
+                    <a href="https://discord.gg/sspR6b2jwx" target="_blank" class="contact-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.27 5.33C17.94 4.7 16.5 4.26 15 4C14.86 4.47 14.69 4.94 14.5 5.4C12.89 5.14 11.11 5.14 9.5 5.4C9.31 4.94 9.14 4.47 9 4C7.5 4.26 6.06 4.7 4.73 5.33C3.88 7.43 3.5 9.67 3.54 11.9C4.86 13.17 6.25 14.07 7.75 14.67C8.14 14.24 8.5 13.76 8.82 13.26C8.21 13.04 7.62 12.78 7.07 12.47C7.03 12.45 7 12.42 7 12.38C7.1 10.93 7.63 9.54 8.5 8.4C8.5 8.4 8.5 8.4 8.5 8.39C9.22 7.79 10.22 7.39 11.33 7.25C11.43 7.24 11.53 7.24 11.63 7.25C12.74 7.39 13.74 7.79 14.46 8.39C14.5 8.4 14.5 8.4 14.5 8.4C15.37 9.54 15.9 10.93 16 12.38C16 12.42 15.97 12.45 15.93 12.47C15.38 12.78 14.79 13.04 14.18 13.26C14.5 13.76 14.86 14.24 15.25 14.67C16.75 14.07 18.14 13.17 19.46 11.9C19.5 9.67 19.12 7.43 18.27 5.33M12 11.33C11.38 11.33 10.83 10.79 10.83 10.17C10.83 9.55 11.38 9 12 9C12.62 9 13.17 9.55 13.17 10.17C13.17 10.79 12.62 11.33 12 11.33M14.17 11.33C13.55 11.33 13 10.79 13 10.17C13 9.55 13.55 9 14.17 9C14.79 9 15.33 9.55 15.33 10.17C15.33 10.79 14.79 11.33 14.17 11.33Z"></path></svg>
+                        Discord
+                    </a>
+                </div>
+                <div class="hero-cta" style="margin-top: 2rem;">
+                    <button class="btn btn-purple" id="contact-buy-rank" data-translate-key="contact.buy_button"></button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> VEXCEL NETWORK — Java & Bedrock • play.vexcelnetwork.top : 25687</p>
+        </div>
+    </footer>
+
+    <!-- Rank Details Modal -->
+    <div id="rank-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-rank-modal">&times;</span>
+            <h2 id="modal-rank-name"></h2>
+            <p class="rank-price" id="modal-rank-price"></p>
+            <h3 data-translate-key="modal.features_title"></h3>
+            <ul id="modal-rank-features">
+                <!-- Features will be injected here -->
+            </ul>
+            <div class="hero-cta" style="margin-top: 2rem; text-align: center;">
+                 <button class="btn btn-purple" id="modal-buy-btn" data-translate-key="modal.buy_button"></button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- TRANSLATION DATA ---
+        const translations = {
+            en: {
+                "nav.home": "Home",
+                "nav.gamemodes": "Game Modes",
+                "nav.ranks": "Ranks",
+                "nav.contact": "Contact",
+                "nav.buy_rank": "Buy Rank",
+                "hero.tagline": "The Best Minecraft Server Experience",
+                "hero.supported_versions": "Java & Bedrock supported — Java 1.8 to latest, Bedrock 1.21.80 to latest",
+                "hero.player_count_loading": "Checking status...",
+                "hero.player_count_online": "Players Online: {count}",
+                "hero.player_count_offline": "Server Offline",
+                "hero.copy_ip": "Copy IP",
+                "hero.copy_port": "Copy Port",
+                "hero.copied": "Copied!",
+                "hero.buy_rank": "Buy Rank",
+                "hero.explore_modes": "Explore Modes",
+                "gamemodes.title": "Our <span>Game Modes</span>",
+                "gamemodes.survival.title": "Survival",
+                "gamemodes.survival.desc": "Classic SMP, economy, claims, events",
+                "gamemodes.lifesteal.title": "Lifesteal",
+                "gamemodes.lifesteal.desc": "Gain hearts by killing, lose them by dying",
+                "gamemodes.skyblock.title": "Skyblock",
+                "gamemodes.skyblock.desc": "Start from an island, complete challenges",
+                "gamemodes.pvp.title": "Duels & PvP",
+                "gamemodes.pvp.desc": "1v1, kits, arenas",
+                "ranks.title": "Server <span>Ranks</span>",
+                "ranks.details_button": "View Details / Buy",
+                "contact.title": "<span>Contact</span> Us",
+                "contact.description": "To buy a rank or for any other inquiries, please contact us.",
+                "contact.buy_button": "Buy Rank (Contact Us)",
+                "modal.features_title": "Features:",
+                "modal.buy_button": "Buy This Rank",
+                "ranks_data": [
+                    { name: "Nexion Rank", price: "190৳", features: ["20K In-game Money", "3 SetHomes", "Max Armor + Tools", "1x Shulker Box", "30x Golden Apple"] },
+                    { name: "Legends Rank", price: "280৳", features: ["30K In-game Money", "4 SetHomes", "Max Armor + Tools", "2x Shulker Box", "48x Golden Apple", "1x Basic Spawner"] },
+                    { name: "PvP God Rank", price: "300৳", features: ["45K In-game Money", "5 SetHomes", "Max Armor + Custom Sword + Bow", "3x Shulker Box", "64x Golden Apple", "1x Spawner", "Exclusive PvP Kit"] },
+                    { name: "Evil-Blooded Rank", price: "360৳", features: ["60K In-game Money", "5 SetHomes", "Max Armor + Custom Enchants", "4x Shulker Box", "72x Golden Apple", "5× Enchantment Golden Apple", "+2x Spawner"] },
+                    { name: "Celestial Rank", price: "390৳", features: ["75K In-game Money", "6 SetHomes", "Max Armor + Tools + Bow + Special Weapons", "5x Shulker Box", "85x Golden Apple", "8× Enchantment Golden Apple", "3x Advanced Spawner"] },
+                    { name: "VIP Rank", price: "430৳", features: ["90K In-game Money", "6 SetHomes", "Max Armor + OP Tools + Weapons", "6x Shulker Box", "92x Golden Apple", "12× Enchantment Golden Apple", "4x Advanced Spawner", "VIP Event Access", "Custom Particle Effects"] },
+                    { name: "Moon Emperor Rank", price: "460৳", features: ["110K In-game Money", "7 SetHomes", "Full Custom Armor + Weapons + Enchants", "7x Shulker Box", "105x Golden Apple", "15× Enchantment Golden Apple", "4x OP Spawner"] },
+                    { name: "GlaXos Rank", price: "490৳", features: ["130K In-game Money", "7 SetHomes", "Best Custom Armor + OP Sword + Bow ⚔️🏹", "8x Shulker Box", "120x Golden Apple", "18× Enchantment Golden Apple", "5x OP Spawner"] },
+                    { name: "NoN Mercy Rank", price: "550৳", features: ["150K In-game Money", "8 SetHomes", "Best Custom Gear + OP Enchants + Special Weapons", "8x Shulker Box", "135x Golden Apple", "22× Enchantment Golden Apple", "5x OP Spawner", "VIP Event & Tournament Access"] },
+                    { name: "Rechest Rank", price: "600৳", features: ["170K In-game Money", "9 SetHomes", "Best Custom Armor + OP Tools + Ultimate Weapons", "9x Shulker Box", "150x Golden Apple", "25× Enchantment Golden Apple", "6x OP Spawner", "Special OP Items & Crate Rewards abilitys"] },
+                    { name: "VeXCel-GouArdiaN Rank", price: "690৳", features: ["200K In-game Money", "10 SetHomes", "God-Tier Custom Gear + Legendary Enchants", "10x Shulker Box", "180x Golden Apple", "30× Enchantment Golden Apple", "6x OP Spawner", "normal Commands & Special Abilities (Except /)", "Exclusive Mounts & Pets"] }
+                ]
+            },
+            bn: {
+                "nav.home": "হোম",
+                "nav.gamemodes": "গেম মোড",
+                "nav.ranks": "র‍্যাঙ্ক",
+                "nav.contact": "যোগাযোগ",
+                "nav.buy_rank": "র‍্যাঙ্ক কিনুন",
+                "hero.tagline": "সেরা মাইনক্রাফ্ট সার্ভার অভিজ্ঞতা",
+                "hero.supported_versions": "Java ও Bedrock সমর্থিত — Java 1.8 থেকে সর্বশেষ, Bedrock 1.21.80 থেকে সর্বশেষ",
+                "hero.player_count_loading": "স্ট্যাটাস চেক করা হচ্ছে...",
+                "hero.player_count_online": "অনলাইন প্লেয়ার: {count}",
+                "hero.player_count_offline": "সার্ভার অফলাইন",
+                "hero.copy_ip": "IP কপি করুন",
+                "hero.copy_port": "Port কপি করুন",
+                "hero.copied": "কপি হয়েছে!",
+                "hero.buy_rank": "র‍্যাঙ্ক কিনুন",
+                "hero.explore_modes": "গেম মোড দেখুন",
+                "gamemodes.title": "আমাদের <span>গেম মোড</span>",
+                "gamemodes.survival.title": "সারভাইভাল",
+                "gamemodes.survival.desc": "ক্লাসিক SMP, ইকোনমি, ক্লেইম, ইভেন্টস",
+                "gamemodes.lifesteal.title": "লাইফস্টিল",
+                "gamemodes.lifesteal.desc": "কিল করলে হার্ট বাড়ে, মরলে কমে",
+                "gamemodes.skyblock.title": "স্কাইব্লক",
+                "gamemodes.skyblock.desc": "দ্বীপ থেকে শুরু, চ্যালেঞ্জ, আইল্যান্ডস",
+                "gamemodes.pvp.title": "ডুয়েলস ও PvP",
+                "gamemodes.pvp.desc": "1v1, কিটস, এরিনা",
+                "ranks.title": "সার্ভার <span>র‍্যাঙ্ক</span>",
+                "ranks.details_button": "বিস্তারিত দেখুন / কিনুন",
+                "contact.title": "আমাদের সাথে <span>যোগাযোগ</span>",
+                "contact.description": "যেকোনো প্রয়োজনে বা র‍্যাঙ্ক কিনতে আমাদের সাথে যোগাযোগ করুন।",
+                "contact.buy_button": "র‍্যাঙ্ক কিনুন (যোগাযোগ করুন)",
+                "modal.features_title": "বৈশিষ্ট্য:",
+                "modal.buy_button": "এই র‍্যাঙ্কটি কিনুন",
+                "ranks_data": [
+                    { name: "Nexion Rank", price: "190৳", features: ["20K In-game Money", "3 SetHomes", "Max Armor + Tools", "1x Shulker Box", "30x Golden Apple"] },
+                    { name: "Legends Rank", price: "280৳", features: ["30K In-game Money", "4 SetHomes", "Max Armor + Tools", "2x Shulker Box", "48x Golden Apple", "1x Basic Spawner"] },
+                    { name: "PvP God Rank", price: "300৳", features: ["45K In-game Money", "5 SetHomes", "Max Armor + Custom Sword + Bow", "3x Shulker Box", "64x Golden Apple", "1x Spawner", "Exclusive PvP Kit"] },
+                    { name: "Evil-Blooded Rank", price: "360৳", features: ["60K In-game Money", "5 SetHomes", "Max Armor + Custom Enchants", "4x Shulker Box", "72x Golden Apple", "5× Enchantment Golden Apple", "+2x Spawner"] },
+                    { name: "Celestial Rank", price: "390৳", features: ["75K In-game Money", "6 SetHomes", "Max Armor + Tools + Bow + Special Weapons", "5x Shulker Box", "85x Golden Apple", "8× Enchantment Golden Apple", "3x Advanced Spawner"] },
+                    { name: "VIP Rank", price: "430৳", features: ["90K In-game Money", "6 SetHomes", "Max Armor + OP Tools + Weapons", "6x Shulker Box", "92x Golden Apple", "12× Enchantment Golden Apple", "4x Advanced Spawner", "VIP Event Access", "Custom Particle Effects"] },
+                    { name: "Moon Emperor Rank", price: "460৳", features: ["110K In-game Money", "7 SetHomes", "Full Custom Armor + Weapons + Enchants", "7x Shulker Box", "105x Golden Apple", "15× Enchantment Golden Apple", "4x OP Spawner"] },
+                    { name: "GlaXos Rank", price: "490৳", features: ["130K In-game Money", "7 SetHomes", "Best Custom Armor + OP Sword + Bow ⚔️🏹", "8x Shulker Box", "120x Golden Apple", "18× Enchantment Golden Apple", "5x OP Spawner"] },
+                    { name: "NoN Mercy Rank", price: "550৳", features: ["150K In-game Money", "8 SetHomes", "Best Custom Gear + OP Enchants + Special Weapons", "8x Shulker Box", "135x Golden Apple", "22× Enchantment Golden Apple", "5x OP Spawner", "VIP Event & Tournament Access"] },
+                    { name: "Rechest Rank", price: "600৳", features: ["170K In-game Money", "9 SetHomes", "Best Custom Armor + OP Tools + Ultimate Weapons", "9x Shulker Box", "150x Golden Apple", "25× Enchantment Golden Apple", "6x OP Spawner", "Special OP Items & Crate Rewards abilitys"] },
+                    { name: "VeXCel-GouArdiaN Rank", price: "690৳", features: ["200K In-game Money", "10 SetHomes", "God-Tier Custom Gear + Legendary Enchants", "10x Shulker Box", "180x Golden Apple", "30× Enchantment Golden Apple", "6x OP Spawner", "normal Commands & Special Abilities (Except /)", "Exclusive Mounts & Pets"] }
+                ]
+            }
+        };
+
+        // --- ELEMENTS ---
+        const playerCountEl = document.getElementById('player-count');
+        const statusDotEl = document.getElementById('status-dot');
+        const copyIpBtn = document.getElementById('copy-ip-btn');
+        const copyPortBtn = document.getElementById('copy-port-btn');
+        const ipAddressEl = document.getElementById('ip-address');
+        const portAddressEl = document.getElementById('port-address');
+        const ranksGridEl = document.getElementById('ranks-grid');
+        const currentYearEl = document.getElementById('current-year');
+        const rankModal = document.getElementById('rank-modal');
+        const closeRankModalBtn = document.getElementById('close-rank-modal');
+        const modalRankNameEl = document.getElementById('modal-rank-name');
+        const modalRankPriceEl = document.getElementById('modal-rank-price');
+        const modalRankFeaturesEl = document.getElementById('modal-rank-features');
+        const modalBuyBtn = document.getElementById('modal-buy-btn');
+        const navBuyRankBtn = document.getElementById('nav-buy-rank');
+        const contactBuyRankBtn = document.getElementById('contact-buy-rank');
+        const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const langButtons = document.querySelectorAll('.lang-switcher button');
+
+        let currentLanguage = localStorage.getItem('language') || 'bn';
+
+        // --- FUNCTIONS ---
+
+        // Set Language
+        const setLanguage = (lang) => {
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+            document.documentElement.lang = lang;
+
+            // Update all elements with a translate key
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.getAttribute('data-translate-key');
+                el.innerHTML = translations[lang][key] || el.innerHTML;
+            });
+
+            // Update active button
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Repopulate dynamic content
+            populateRanks();
+        };
+
+        // Mobile Nav Toggle
+        mobileNavToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Fetch Player Count
+        const fetchPlayerCount = async () => {
+            const javaApi = 'https://api.mcsrvstat.us/2/play.vexcelnetwork.top';
+            const bedrockApi = 'https://api.mcsrvstat.us/bedrock/2/play.vexcelnetwork.top:25687';
+            
+            try {
+                const [javaRes, bedrockRes] = await Promise.all([ fetch(javaApi), fetch(bedrockApi) ]);
+                const javaData = javaRes.ok ? await javaRes.json() : { online: false };
+                const bedrockData = bedrockRes.ok ? await bedrockRes.json() : { online: false };
+                
+                const javaPlayers = (javaData.online && javaData.players) ? javaData.players.online : 0;
+                const bedrockPlayers = (bedrockData.online && bedrockData.players) ? bedrockData.players.online : 0;
+                
+                const totalPlayers = javaPlayers + bedrockPlayers;
+                const isOnline = javaData.online || bedrockData.online;
+
+                if (isOnline) {
+                    playerCountEl.textContent = translations[currentLanguage]['hero.player_count_online'].replace('{count}', totalPlayers);
+                    statusDotEl.classList.add('online');
+                } else {
+                    playerCountEl.textContent = translations[currentLanguage]['hero.player_count_offline'];
+                    statusDotEl.classList.remove('online');
+                }
+            } catch (error) {
+                console.error('Error fetching player count:', error);
+                playerCountEl.textContent = translations[currentLanguage]['hero.player_count_offline'];
+                statusDotEl.classList.remove('online');
+            }
+        };
+
+        // Copy to Clipboard
+        const copyToClipboard = (text, btn) => {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = translations[currentLanguage]['hero.copied'];
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => console.error('Failed to copy: ', err));
+        };
+
+        // Populate Ranks
+        const populateRanks = () => {
+            const ranksData = translations[currentLanguage].ranks_data;
+            ranksGridEl.innerHTML = '';
+            ranksData.forEach((rank, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>${rank.name}</h3>
+                    <p class="rank-price">${rank.price}</p>
+                    <button class="btn view-details-btn" data-rank-index="${index}">${translations[currentLanguage]['ranks.details_button']}</button>
+                `;
+                ranksGridEl.appendChild(card);
+            });
+        };
+
+        // Modal Logic
+        const openRankModal = (rank) => {
+            modalRankNameEl.textContent = rank.name;
+            modalRankPriceEl.textContent = rank.price;
+            modalRankFeaturesEl.innerHTML = rank.features.map(f => `<li>${f}</li>`).join('');
+            rankModal.style.display = 'block';
+        };
+
+        const closeRankModal = () => {
+            rankModal.style.display = 'none';
+        };
+        
+        const openContactSection = () => {
+            closeRankModal();
+            const contactSection = document.getElementById('contact');
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+            contactSection.style.transition = 'background-color 0.5s ease';
+            contactSection.style.backgroundColor = 'rgba(168, 85, 247, 0.1)';
+            setTimeout(() => {
+                contactSection.style.backgroundColor = 'transparent';
+            }, 1500);
+        };
+        
+        // --- EVENT LISTENERS ---
+        copyIpBtn.addEventListener('click', () => copyToClipboard(ipAddressEl.textContent, copyIpBtn));
+        copyPortBtn.addEventListener('click', () => copyToClipboard(portAddressEl.textContent, copyPortBtn));
+
+        ranksGridEl.addEventListener('click', (e) => {
+            if (e.target.classList.contains('view-details-btn')) {
+                const rankIndex = e.target.getAttribute('data-rank-index');
+                const ranksData = translations[currentLanguage].ranks_data;
+                openRankModal(ranksData[rankIndex]);
+            }
+        });
+
+        closeRankModalBtn.addEventListener('click', closeRankModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === rankModal) closeRankModal();
+        });
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && rankModal.style.display === 'block') closeRankModal();
+        });
+        
+        modalBuyBtn.addEventListener('click', openContactSection);
+        navBuyRankBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openContactSection();
+        });
+        contactBuyRankBtn.addEventListener('click', openContactSection);
+
+        langButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                setLanguage(button.dataset.lang);
+            });
+        });
+
+        // --- INITIALIZATION ---
+        currentYearEl.textContent = new Date().getFullYear();
+        setLanguage(currentLanguage);
+        fetchPlayerCount();
+        setInterval(fetchPlayerCount, 60000);
+    });
+    </script>
+</body>
+</html>
